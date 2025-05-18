@@ -10,3 +10,5 @@ spring:
 #    url: r2dbc:h2:mem:///userdb
 #    username: sa
 #    password: password
+
+sec: sec03
