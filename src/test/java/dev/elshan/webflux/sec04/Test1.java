@@ -1,4 +1,4 @@
-package dev.elshan.webflux.sec03;
+package dev.elshan.webflux.sec04;
 
 import dev.elshan.webflux.sec02.model.Customer;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 @AutoConfigureWebTestClient
 @SpringBootTest
-public class WebClientTest1 {
-
-    private static final Logger log = LoggerFactory.getLogger(WebClientTest1.class);
+public class Test1 {
+    private static final Logger log = LoggerFactory.getLogger(Test1.class);
     @Autowired
     private WebTestClient webTestClient;
 
@@ -44,14 +43,12 @@ public class WebClientTest1 {
 
     @Test
     public void getCustomersById() {
-        webTestClient.get().uri("/customer/1")
+        webTestClient.get().uri("/customer/11")
                 .exchange()
                 .expectStatus()
-                .is2xxSuccessful()
+                .is4xxClientError()
                 .expectBody()
-                .consumeWith(customers -> log.info("{}", new String(customers.getResponseBody())))
-                .jsonPath("$.id").isEqualTo(1)
-                .jsonPath("$.name").isEqualTo("sam")
+                .jsonPath("$.detail").isEqualTo("Customer not found with given 11 id")
         ;
     }
 
@@ -74,5 +71,4 @@ public class WebClientTest1 {
                 .is2xxSuccessful()
                 .expectBody().isEmpty();
     }
-
 }
