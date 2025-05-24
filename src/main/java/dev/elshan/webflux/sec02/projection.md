@@ -5,9 +5,6 @@ In Different Contexts:
    Projection means selecting specific columns or fields rather than retrieving the whole record.
 
 Example (SQL):
-sql
-Copy
-Edit
 SELECT name, price FROM products;
 This query "projects" only the name and price fields of the products table.
 
@@ -15,8 +12,6 @@ In Spring Data (JPA or Reactive):
 You can define interfaces or classes to project data into.
 
 java
-Copy
-Edit
 public interface ProductView {
 String getName();
 BigDecimal getPrice();
@@ -24,17 +19,12 @@ BigDecimal getPrice();
 And use it in a repository:
 
 java
-Copy
-Edit
 Flux<ProductView> findByPriceBetween(BigDecimal min, BigDecimal max);
 2. DTO Mapping
    Projection is also used when mapping an entity to a Data Transfer Object (DTO) to only expose or send necessary data.
 
 Example:
 
-java
-Copy
-Edit
 public class ProductDTO {
 private String name;
 private BigDecimal price;
@@ -42,15 +32,13 @@ private BigDecimal price;
 You map an entity (Product) to this DTO for frontend use:
 
 java
-Copy
-Edit
+
 ProductDTO dto = new ProductDTO(product.getName(), product.getPrice());
 3. Functional Programming / Streams
    Projection can mean transforming an object to another representation, often with map():
 
 java
-Copy
-Edit
+
 List<String> names = products.stream()
 .map(Product::getName)  // projection to name
 .collect(Collectors.toList());
